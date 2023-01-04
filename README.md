@@ -54,12 +54,12 @@ The source file is `source\03_Exploratory_Analysis.ipynb`
 
  1. What are the words/topics discussed:
  
- ![image2](visualization\label_word_count_y.png)
+ ![image2](visualization/label_word_count_y.png)
 
  
  2. What are the most popular hashtags / words of each tweet type ?
  
- ![image3](visualization\wordcloud.png)
+ ![image3](visualization/wordcloud.png)
  
  
  For scraping our tweets, we have used the words vote, voting, elections, etc. and we see those are mostly commonly used words in the tweets and all the other words  are related to US midterm elections.
