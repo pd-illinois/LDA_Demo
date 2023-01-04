@@ -1,54 +1,8 @@
-# CourseProject
 
-Please fork this repository and paste the github link of your fork on Microsoft CMT. Detailed instructions are on Coursera under Week 1: Course Project Overview/Week 9 Activities.
+## **Demo Twitter Topic Analysis**
 
-## **Final Project : US Midterm Election – Twitter Sentiment & Topic Analysis**
-
-* Course : CS410 Text Information Systems <br/>
-* **Course Team**
-    * Prateek Dhiman (Captain) : pdhiman2@illinois.edu
-    * Unnati Hasija : uhasija2@illinois.edu
-* Key Assets
-    * Github Repo : https://github.com/pd-illinois/CS410Googolplex 
-    * Main Presentation with Setup Instructions / Result of Source Code Run / Error faced with Solution : CS410_Project_USMidtermElection.pdf 
-    * Project Recording on Youtube. Click the logo below to view  : 
-    [![CS410](/visualization/Main_logo.png)](https://www.youtube.com/watch?v=P1Q5hqZ8f58 "CS410")
-
- 
-### **Introduction**
-The social network has the capability to influence and change what people think, do, and react to everything happening around them. The social network has the capability to incept thoughts and ideas at an individual and societal level. 
-
-Around election season, when there is a political environment around the nation, social media tools add fuel to political polarity. Through this project, we would like to identify the political sentiments and top topics that are discussed.
-
-### **Project Overview**
-We scraped Twitter data, preprocessed it and performed the following for US Midterm Election as a key area.
-* Sentiment Analysis and prediction
-        With Naïve Bayes Classification
-        With K-Nearest Neighbor Classification
 * Topic Analysis with Latent Dirichlet Allocation
 
-### **Goals**
-
-Key Goals for the project that we set and achieved were
-* *Sentiment Analysis*  : Identify overall positive , negative and neutral sentiments towards elections and respective parties in US
-* *Prediction* : Predict tweets for sentiments using Naïve Bayes and KNN. Also perform a comparison which Algorithm performs better and impact of data cleaning   techniques on precision and accuracy of predictions.
-*  *Topic Analysis* : Identify top topics in tweets and predict the dominant topic and its percentage for each tweet.
-*  *Visualize* : Lastly compare our findings and present them as part of our final project.
-
-**Project Approach and Architecture:**
-
-![Image1](/visualization/Implementation_Arch.png)
-
-* **Contribution and credits** 
-    * Step1 : Data Scrapping & Storage  : Prateek
-    * Step2 : Data Preprocessing        : Prateek & Unnati
-    * Step3 : Exploratory Analysis      : Prateek & Unnati
-    * Step4 & 5 : Model Build & Train
-        * Naive Bayes & KNN             : Unnati
-        * LDA                           : Prateek
-    * Step 6 : Visualizations
-        * Naive Bayes & KNN             : Unnati
-        * LDA                           : Prateek
 
 #### Step 1: Data Scrapping & Storage
 
@@ -63,36 +17,26 @@ No User sensetive information was captured.
 
 #### Step 2: Data Preprocessing
 
-In the Data Prepocessing areas , we aim to clean the collected tweets and use them at various stages to calculate sentiment accuracy. At this stage our goal is to check how Data Cleaning impacts Sentiment analysis.
+This step is divided into following parts in the file `source\02_Data_Preprocess.ipynb`
 
-This step is divided into three sub parts in the file `source\02_Data_Preprocess.ipynb`
 
-a. Initial Data preperation 
-    Replacing Empty Locations with Unknown
-    Filtering out Non English Tweets
-    
-b. Generic Data Cleaning
-    Lowercaseing
-    Removing special characters
-    Removing Whitespaces
-    Removing tagged Usernames
-    Removing Hashtags
-    Removing RT
-    Removing URLs and Http tags
-    Removing Punctuations
-    Removing Emojis
-    Stopword Removal
-    
-c. NLP Specific Data Cleaning
-    Lemmatization
+Replacing Empty Locations with Unknown
+Filtering out Non English Tweets   
+Lowercaseing
+Removing special characters
+Removing Whitespaces
+Removing tagged Usernames
+Removing Hashtags
+Removing RT
+Removing URLs and Http tags
+Removing Punctuations
+Removing Emojis
+Stopword Removal
+Lemmatization
 
-Finally we created pickle package that will be used in exploratory analysis and Sentiment Analysis baseline (VADER)
  
 #### Step 3: Exploratory Analysis and Baseline Sentiment Analysis Using VADER
 
-Valence aware dictionary for sentiment reasoning (VADER) is a popular rule-based sentiment analyzer. It uses a list of lexical features (e.g. word) which are labeled as positive or negative according to their semantic orientation to calculate the text sentiment. Vader sentiment returns the probability of a given input sentence to be postive, negative, neutral.
-
-Vader is optimized for social media data and can yield good results when used with data from twitter, facebook, etc.
 The source file is `source\03_Exploratory_Analysis.ipynb`
 
 *Cleaned Dataset Columns:*
@@ -104,35 +48,22 @@ The source file is `source\03_Exploratory_Analysis.ipynb`
     num_of_likes            Number of likes on the tweet	
     num_of_retweet          Number of retweets	
     language                language of the tweet, in our case it's english	
-    cleaned_tweets          cleaned tweets by removing the punctuations	
-    final_cleaned_tweets    cleaned tweets using lemmatization	
+    cleaned_tweets          cleaned tweets by removing the punctuations	and lemmatization
 
  **Exploratory Data Analysis Results**
 
  1. What are the words/topics discussed:
  
- ![image2](https://user-images.githubusercontent.com/109382284/206315656-25ceffac-1122-4c34-b7b8-75eadc4b30da.png)
+ ![image2](visualization\label_word_count_y.png)
 
-As we see here, the words seen pre and post lemmatization are almost same. We wanted to see the change lemmatization brings on overall topic modeling and sentiment analysis. since, the words are similar, we assume our accuracy on both pre and post lemmatization should be similar. 
  
- 2. What are the most popular hashtags of each tweet type ?
+ 2. What are the most popular hashtags / words of each tweet type ?
  
- ![image3](https://user-images.githubusercontent.com/109382284/206284240-af6be292-19b1-4dd7-8e3b-0fcb0df0c3f3.png)
+ ![image3](visualization\wordcloud.png)
  
  
  For scraping our tweets, we have used the words vote, voting, elections, etc. and we see those are mostly commonly used words in the tweets and all the other words  are related to US midterm elections.
  
- 3. What is the overall polarity of the tweets ?
- 
- ![image4](https://user-images.githubusercontent.com/109382284/206284649-ae9d4ab4-2361-4332-bfc1-40e7f6b35605.png)
-
- 
-The above bar graph shows the three subset of data. 
-    * Original 
-    * Cleaned ( without lemmatization)
-    * NLPCleaned ( With Lemmatization)
-
-    **Conclusion** - We can see that positive sentiment declined while Negative sentiment were identified more in context of our research. The final data set of NLP cleaned is a fairly balanced dataset for further analysis. This also serves as our baseline dataset for prediction and topic analysis. 
 
 #### Step 4 and 5: Train and Build Naive Bayes , KNN and LDA with Model Evaluations
  
@@ -144,45 +75,10 @@ LDA uses an unsupervised learning approach and is a Bayesian Version of PLSA and
 We have used Gensim library to build the corpus and dictionary for our LDA model. After multiple iterations and hyperparamterization , we concluded that at 10 topic our model performed at the best with 0.41 Coherance score. The results are discussed in the visualization section and our recorded video.
 
 
-**Sentiment Analysis using Naive Bayes**
-
-In this project, we have taken Vader Sentiment Analyzer to be our baseline for generating the labels for positive, negative and neutral. While implementing, we had also used TextBlob sentiment analyzer but found Vader sentiment analyzer to be better in distributing the data. (with TextBlob, there were more tweets classified as Neutral as compared with Vader).
-
-For training the model, we use 75 % of the data and rest 25% for testing.
-
-We have tried use Naive Bayes algorithm with both Count vectorizer which performs the task of tokenizing and counting and TF-IDF focuses on the frequency of words present in the corpus and also provides the importance of the words.
-        
-**Sentiment Analysis using K-Nearest Neighbor**
-        
-We also tried to use the discriminative algorithm: K-Nearest neighbor for predicting the sentiment of the same above mentioned data set. We have taken vader sentiment analyzer to be our baseline for generating the labels for positive, negative and neutral. Here also, we import the same cleaned and pre-processed data as in Naive Bayes but we have used 80% of the data for training and rest 20% for testing.
-Building the feature vector for K-NN was a very time taking step. 
-
 #### Step 6: Visualizations
 
 **Results Comparison**
         
- *Naive Bayes using Count Vectorizer*:
-
-![Image1](/visualization/NB_1.png)
-        
- - As the value of n-grams increase, accuracy, precision, recall and F1-score decrease.
-        
-  *Naive Bayes using Tf-IDF*:
- 
-        
-![image5](/visualization/NB_2.png)
-
-        
- - Same as Naive Bayes using Count Vectorizer since the stopwords which become the common words were already removed.
-        
-  *K-NN*
-        
-![image5](/visualization/KNN.png)
-
-        
-  - Accuracy, Recall and F1 score decrease as value of k increases, Precision increases.
-  - Accuracy as compared with Naive Bayes is less.
-
   *LDA*
 
 
@@ -190,15 +86,6 @@ Building the feature vector for K-NN was a very time taking step.
   We see the distribution of words as well the top topics and its relevance in the document.
 ![image6](/visualization/LDA.png)
 
-
-**Conclusion and Future work**
-
-- Accuracy improves if the data has been cleansed properly. We removed the words that are not a part of nltk.words. This helped in improving the accuracy for Naïve  Bayes from 65% to 75%. 
-- For KNN, difficult to build a feature vector of huge number of tweets. 
-- For sentiment analysis on tweets data, we found Naïve Bayes to show better accuracy over K-NN.
-- It was more difficult to train K-NN as compared with Naïve Bayes. Hence, we conclude to use Naïve Bayes for sentiment analysis on Tweets data.
-- For future work, the same model could be evaluated for different subjects other than US midterm elections by simply scraping the data on another topic from Twitter using the code provided and plugging that data for Topic Modeling and Text Categorization and could be evaluated for accuracy.
-- Future work could also include modeling other text categorization techniques like SVM, Deep Learning (LSTM), etc. with word embedding techniques such as Word2vec could also be applied and compared for accuracy.
 
 
 
